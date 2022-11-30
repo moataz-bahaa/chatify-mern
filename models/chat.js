@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const chatSchema = new mongoose.Schema(
   {
@@ -13,19 +13,19 @@ const chatSchema = new mongoose.Schema(
     users: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
     latestMessage: {
       type: mongoose.Types.ObjectId,
-      ref: "Message",
+      ref: 'Message',
     },
     groupAdmin: {
       type: mongoose.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Chat", chatSchema);
+export default mongoose.model('Chat', chatSchema);

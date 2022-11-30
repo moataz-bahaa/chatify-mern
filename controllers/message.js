@@ -9,7 +9,7 @@ const sendMessage = async (req, res) => {
   const { message, chatId } = req.body;
 
   if (!message || !chatId) {
-    return BadRequestError("Please Provide All Fields To send Message");
+    throw new BadRequestError("Please Provide All Fields To send Message");
   }
 
   let newMessage = {

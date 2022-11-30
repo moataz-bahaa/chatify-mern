@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getUserFromLocalStorage } from "../utils/localStorage";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUserFromLocalStorage } from '../utils/localStorage';
 
 const ChatContext = createContext();
 
@@ -13,12 +13,13 @@ const ChatProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loggedInUser = getUserFromLocalStorage("user");
+    const loggedInUser = getUserFromLocalStorage('user');
     setUser(loggedInUser);
 
     if (!loggedInUser) {
-      navigate("/register");
+      navigate('/register');
     }
+    console.log('chat provider');
   }, [navigate]);
 
   return (

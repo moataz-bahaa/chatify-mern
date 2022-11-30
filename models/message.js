@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const messageSchema = new mongoose.Schema(
   {
     sender: {
       type: mongoose.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
     message: {
       type: String,
@@ -12,7 +12,7 @@ const messageSchema = new mongoose.Schema(
     },
     chat: {
       type: mongoose.Types.ObjectId,
-      ref: "Chat",
+      ref: 'Chat',
     },
   },
   {
@@ -20,4 +20,4 @@ const messageSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Message", messageSchema);
+export default mongoose.model('Message', messageSchema);

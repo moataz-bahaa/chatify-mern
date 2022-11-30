@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -12,18 +12,18 @@ import {
   FormControl,
   Input,
   Box,
-} from "@chakra-ui/react";
-import api from "../utils/axios";
-import { useAppContext } from "../context/ChatProvider";
-import UserBadgeItem from "./UserBadgeItem";
-import UserListItem from "./UserListItem";
-import { toast } from "react-toastify";
+} from '@chakra-ui/react';
+import api from '../utils/axios';
+import { useAppContext } from '../context/ChatProvider';
+import UserBadgeItem from './UserBadgeItem';
+import UserListItem from './UserListItem';
+import { toast } from 'react-toastify';
 
 const GroupChatModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState();
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -53,8 +53,7 @@ const GroupChatModal = ({ children }) => {
 
   const handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
-      toast.error("User Already Added!");
-      return;
+      return toast.error('User Already Added!');
     }
 
     setSelectedUsers([...selectedUsers, userToAdd]);
@@ -62,20 +61,19 @@ const GroupChatModal = ({ children }) => {
 
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
-      toast.error("Please Fill Up All The Fields");
-      return;
+      return toast.error('Please Fill Up All The Fields');
     }
 
     try {
       const { data } = await api.post(`/api/v1/chat/createGroup`, {
         name: groupChatName,
-        users: JSON.stringify(selectedUsers.map((u) => u._id)),
+        users: selectedUsers.map((u) => u._id),
       });
       setChats([data, ...chats]);
       onClose();
-      toast.success("SuccessFully Created New Group");
+      toast.success('SuccessFully Created New Group');
     } catch (error) {
-      toast.error("Failed To Create Group");
+      toast.error('Failed To Create Group');
     }
   };
 
@@ -87,30 +85,30 @@ const GroupChatModal = ({ children }) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            fontSize="35px"
-            display="flex"
-            justifyContent="center"
-            fontFamily="Poppins"
+            fontSize='35px'
+            display='flex'
+            justifyContent='center'
+            fontFamily='Poppins'
           >
             Create Group Chat
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody d="flex" flexDir="column" alignItems="center">
+          <ModalBody d='flex' flexDir='column' alignItems='center'>
             <FormControl>
               <Input
-                placeholder="Group Name"
+                placeholder='Group Name'
                 mb={3}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Add Users:"
+                placeholder='Add Users:'
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
-            <Box w="100%" display="flex" flexWrap="wrap">
+            <Box w='100%' display='flex' flexWrap='wrap'>
               {selectedUsers.map((u) => (
                 <UserBadgeItem
                   key={u._id}
@@ -123,7 +121,7 @@ const GroupChatModal = ({ children }) => {
               <div>Loading...</div>
             ) : (
               searchResult
-                ?.slice(0, 4)
+                ?.slice(0, 5)
                 .map((user) => (
                   <UserListItem
                     key={user._id}
@@ -135,13 +133,13 @@ const GroupChatModal = ({ children }) => {
           </ModalBody>
           <ModalFooter>
             <Button
-              fontFamily="Poppins"
+              fontFamily='Poppins'
               onClick={handleSubmit}
-              colorScheme="blue"
-              background=" rgba(67, 43, 255, 0.8)"
+              colorScheme='blue'
+              background=' rgba(67, 43, 255, 0.8)'
               _hover={{
-                background: " rgba(67, 43, 255, 0.8)",
-                color: "white",
+                background: ' rgba(67, 43, 255, 0.8)',
+                color: 'white',
               }}
             >
               Create Chat

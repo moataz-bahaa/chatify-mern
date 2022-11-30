@@ -1,4 +1,28 @@
-import BadRequestError from './bad-request.js'
-import NotFoundError from './not-found.js'
-import UnAuthenticatedError from './unauthenticated.js'
-export { BadRequestError, NotFoundError, UnAuthenticatedError }
+import { StatusCodes } from 'http-status-codes';
+
+class CustomError extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+
+export class NotFoundError extends CustomError {
+  constructor(message) {
+    super(message);
+    this.statusCode = StatusCodes.NotFoundError;
+  }
+}
+
+export class BadRequestError extends CustomError {
+  constructor(message) {
+    super(message);
+    this.statusCode = StatusCodes.BAD_REQUEST;
+  }
+}
+
+export class UnAuthenticatedError extends CustomError {
+  constructor(message) {
+    super(message);
+    this.statusCode = StatusCodes.UNAUTHORIZED;
+  }
+}

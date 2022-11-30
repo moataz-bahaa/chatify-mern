@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -14,27 +14,27 @@ import {
   Box,
   IconButton,
   Spinner,
-} from "@chakra-ui/react";
-import api from "../utils/axios";
-import UserBadgeItem from "./UserBadgeItem";
-import UserListItem from "./UserListItem";
-import { useAppContext } from "../context/ChatProvider";
-import { ViewIcon } from "@chakra-ui/icons";
-import { toast } from "react-toastify";
+} from '@chakra-ui/react';
+import api from '../utils/axios';
+import UserBadgeItem from './UserBadgeItem';
+import UserListItem from './UserListItem';
+import { useAppContext } from '../context/ChatProvider';
+import { ViewIcon } from '@chakra-ui/icons';
+import { toast } from 'react-toastify';
 
 const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user } = useAppContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [renameloading, setRenameLoading] = useState(false);
 
   const handleRemove = async (user1) => {
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
-      toast.error("Only Admin Have Permission To Remove User");
+      toast.error('Only Admin Have Permission To Remove User');
       return;
     }
 
@@ -54,7 +54,7 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       toast.error(error);
       setLoading(false);
     }
-    setGroupChatName("");
+    setGroupChatName('');
   };
 
   const handleSearch = async (query) => {
@@ -93,17 +93,17 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       toast.error(error);
       setRenameLoading(false);
     }
-    setGroupChatName("");
+    setGroupChatName('');
   };
 
   const handleAddUser = async (user1) => {
     if (selectedChat.users.find((u) => u._id === user1._id)) {
-      toast.error("User Already In Group");
+      toast.error('User Already In Group');
       return;
     }
 
     if (selectedChat.groupAdmin._id !== user._id) {
-      toast.error("Ony Admin Can Add Users");
+      toast.error('Ony Admin Can Add Users');
       return;
     }
 
@@ -122,37 +122,33 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       toast.error(error);
       setLoading(false);
     }
-    setGroupChatName("");
+    setGroupChatName('');
   };
 
   return (
     <>
-      <IconButton
-        display={{ base: "flex" }}
-        icon={<ViewIcon />}
-        onClick={onOpen}
-      />
+      <IconButton display={{ base: 'flex' }} icon={<ViewIcon />} onClick={onOpen} />
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            fontSize="35px"
-            fontFamily="Poppins"
-            display="flex"
-            justifyContent="center"
+            fontSize='35px'
+            fontFamily='Poppins'
+            display='flex'
+            justifyContent='center'
           >
             {selectedChat.chatName}
           </ModalHeader>
 
           <ModalCloseButton />
           <ModalBody
-            display="flex"
-            flexDir="column"
-            alignItems="center"
-            fontFamily="Poppins"
+            display='flex'
+            flexDir='column'
+            alignItems='center'
+            fontFamily='Poppins'
           >
-            <Box w="100%" d="flex" flexWrap="wrap" pb={3}>
+            <Box w='100%' d='flex' flexWrap='wrap' pb={3}>
               {selectedChat.users.map((u) => (
                 <UserBadgeItem
                   key={u._id}
@@ -162,20 +158,20 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 />
               ))}
             </Box>
-            <FormControl display="flex">
+            <FormControl display='flex'>
               <Input
-                placeholder="Chat Name"
+                placeholder='Chat Name'
                 mb={3}
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
               <Button
-                variant="solid"
-                colorScheme="teal"
-                background=" rgba(67, 43, 255, 0.8)"
+                variant='solid'
+                colorScheme='teal'
+                background=' rgba(67, 43, 255, 0.8)'
                 _hover={{
-                  background: " rgba(67, 43, 255, 0.8)",
-                  color: "white",
+                  background: ' rgba(67, 43, 255, 0.8)',
+                  color: 'white',
                 }}
                 ml={1}
                 isLoading={renameloading}
@@ -186,14 +182,14 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Add User to group"
+                placeholder='Add User to group'
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
 
             {loading ? (
-              <Spinner size="lg" />
+              <Spinner size='lg' />
             ) : (
               searchResult?.map((user) => (
                 <UserListItem
@@ -206,9 +202,9 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           </ModalBody>
           <ModalFooter>
             <Button
-              fontFamily="Poppins"
+              fontFamily='Poppins'
               onClick={() => handleRemove(user)}
-              colorScheme="red"
+              colorScheme='red'
             >
               Leave Group
             </Button>

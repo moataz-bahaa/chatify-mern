@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 const router = express.Router();
 
 import {
@@ -8,12 +8,13 @@ import {
   renameGroup,
   removeFromGroup,
   addUserToGroup,
-} from "../controllers/chat.js";
+} from '../controllers/chat.js';
 
-router.route("/").post(getChat).get(getChats);
-router.route("/createGroup").post(createGroup);
-router.route("/renameGroup").patch(renameGroup);
-router.route("/removeFromGroup").patch(removeFromGroup);
-router.route("/addUserToGroup").patch(addUserToGroup);
+router.get('/', getChats);
+router.get('/:userId', getChat);
+router.post('/createGroup', createGroup);
+router.patch('/renameGroup', renameGroup);
+router.patch('/removeFromGroup', removeFromGroup);
+router.patch('/addUserToGroup', addUserToGroup);
 
 export default router;

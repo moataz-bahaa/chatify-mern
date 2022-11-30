@@ -1,4 +1,4 @@
-import { ViewIcon } from "@chakra-ui/icons";
+import { ViewIcon } from '@chakra-ui/icons';
 import {
   Modal,
   ModalOverlay,
@@ -11,7 +11,7 @@ import {
   IconButton,
   Text,
   Image,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const ProfileModal = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,38 +21,34 @@ const ProfileModal = ({ user, children }) => {
       {children ? (
         <span onClick={onOpen}>{children}</span>
       ) : (
-        <IconButton
-          display={{ base: "flex" }}
-          icon={<ViewIcon />}
-          onClick={onOpen}
-        />
+        <IconButton display={{ base: 'flex' }} icon={<ViewIcon />} onClick={onOpen} />
       )}
-      <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal size='lg' onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent h="440px">
+        <ModalContent h='440px'>
           <ModalCloseButton />
 
           <ModalBody
-            display="flex"
-            flexDir="column"
-            alignItems="center"
-            justifyContent="center"
+            display='flex'
+            flexDir='column'
+            alignItems='center'
+            justifyContent='center'
           >
             <Text
-              fontSize="20px"
-              fontFamily="Poppins"
-              display="flex"
-              justifyContent="center"
+              fontSize='20px'
+              fontFamily='Poppins'
+              display='flex'
+              justifyContent='center'
             >
               {user.username}
             </Text>
             <Image
-              borderRadius="full"
-              boxSize="150px"
+              borderRadius='full'
+              boxSize='150px'
               src={user.avatar}
               alt={user.username}
             />
-            <Text fontSize={{ base: "28px", md: "30px" }} fontFamily="Poppins">
+            <Text fontSize={{ base: '28px', md: '30px' }} fontFamily='Poppins'>
               Email: {user.email}
             </Text>
           </ModalBody>
